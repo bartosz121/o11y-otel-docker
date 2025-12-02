@@ -3,13 +3,13 @@ services:
     image: prom/prometheus:v3.7.3
     container_name: prometheus
     command:
-      - '--config.file=/etc/prometheus/prometheus.yaml'
-      - '--storage.tsdb.path=/prometheus'
-      - '--web.console.libraries=/etc/prometheus/console_libraries'
-      - '--web.console.templates=/etc/prometheus/consoles'
-      - '--web.enable-lifecycle'
-      - '--web.external-url=http://localhost:9090'
-      - '--storage.tsdb.retention.time=15d' # Keeping 15d as a safe default, scrape interval controls granularity
+      - "--config.file=/etc/prometheus/prometheus.yaml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.console.libraries=/etc/prometheus/console_libraries"
+      - "--web.console.templates=/etc/prometheus/consoles"
+      - "--web.enable-lifecycle"
+      - "--web.external-url=http://localhost:9090"
+      - "--storage.tsdb.retention.time=15d" # Keeping 15d as a safe default, scrape interval controls granularity
     volumes:
       - ./prometheus/prometheus.yaml:/etc/prometheus/prometheus.yaml:ro
       - ./prometheus/alerts.yaml:/etc/prometheus/alerts.yaml:ro
@@ -24,8 +24,8 @@ services:
     image: prom/alertmanager:v0.29.0
     container_name: alertmanager
     command:
-      - '--config.file=/etc/alertmanager/config.yaml'
-      - '--storage.path=/alertmanager'
+      - "--config.file=/etc/alertmanager/config.yaml"
+      - "--storage.path=/alertmanager"
     volumes:
       - ./alertmanager/config.yaml:/etc/alertmanager/config.yaml:ro
       - alertmanager_data:/alertmanager
@@ -67,7 +67,7 @@ services:
   tempo:
     image: grafana/tempo:2.9.0
     container_name: tempo
-    command: [ "-config.file=/etc/tempo/tempo-config.yaml" ]
+    command: ["-config.file=/etc/tempo/tempo-config.yaml"]
     volumes:
       - ./tempo/tempo-config.yaml:/etc/tempo/tempo-config.yaml:ro
       - tempo_data:/var/tempo
@@ -111,11 +111,11 @@ services:
     image: prom/node-exporter:v1.10.2
     container_name: node-exporter
     command:
-      - '--path.rootfs=/host'
+      - "--path.rootfs=/host"
     pid: host
     restart: unless-stopped
     volumes:
-      - '/:/host:ro,rslave'
+      - "/:/host:ro,rslave"
     networks:
       - o11yotel
 
